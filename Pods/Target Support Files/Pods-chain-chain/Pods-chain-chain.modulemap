@@ -1,0 +1,6 @@
+framework module Pods_chain_chain {
+  umbrella header "Pods-chain-chain-umbrella.h"
+
+  export *
+  module * { export * }
+}
