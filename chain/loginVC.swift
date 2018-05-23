@@ -17,7 +17,7 @@ class loginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !AWSSignInManager.sharedInstance().isLoggedIn {
+        if AWSSignInManager.sharedInstance().isLoggedIn {
             presentAuthUIViewController()
         }
     }
@@ -36,6 +36,7 @@ class loginVC: UIViewController {
             configuration: config, completionHandler: { (provider: AWSSignInProvider, error: Error?) in
                 if error == nil {
                     // SignIn succeeded.
+                      print("sign in successfully")
                 } else {
                     // end user faced error while loggin in, take any required action here.
                 }
