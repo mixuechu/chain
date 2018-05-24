@@ -19,10 +19,11 @@ target 'chain' do
   target :'chain' do
     use_frameworks!
     pod 'AWSMobileClient', '~> 2.6.13'
-
+    pod 'AWSAuthCore', '~> 2.6.13'
     pod 'AWSPinpoint', '~> 2.6.13'
     pod 'AWSUserPoolsSignIn', '~> 2.6.13'
     pod 'AWSAuthUI', '~> 2.6.13'
+    pod 'AWSDynamoDB', '~> 2.6.13'
 
     # other pods
 

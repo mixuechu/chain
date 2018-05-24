@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSAuthUI
+import AWSAuthCore
 import AWSMobileClient
 import AWSUserPoolsSignIn
 
@@ -15,11 +16,20 @@ import AWSUserPoolsSignIn
 
 class loginVC: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if AWSSignInManager.sharedInstance().isLoggedIn {
+        if !AWSSignInManager.sharedInstance().isLoggedIn {
             presentAuthUIViewController()
         }
+    }
+    
+   
+    @IBAction func logout(_ sender: UIButton) {
+        print (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+        )
+        AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
+        })
     }
     
     func presentAuthUIViewController() {
@@ -37,6 +47,13 @@ class loginVC: UIViewController {
                 if error == nil {
                     // SignIn succeeded.
                       print("sign in successfully")
+                    let pp:ProfilePicture = ProfilePicture()
+                    pp.createProfilePicture()
+                    print (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+                    )
+                    
+                    
+                    
                 } else {
                     // end user faced error while loggin in, take any required action here.
                 }

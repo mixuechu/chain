@@ -20,6 +20,7 @@
 		A367C7A920AFD8D3004F4F20 /* myinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7A820AFD8D3004F4F20 /* myinfo.swift */; };
 		A367C7AB20AFDC75004F4F20 /* mymessagetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7AA20AFDC75004F4F20 /* mymessagetable.swift */; };
 		A367C7AD20AFDFCA004F4F20 /* customercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7AC20AFDFCA004F4F20 /* customercell.swift */; };
+		B938A94B20B735350068EB01 /* profile_picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938A94A20B735350068EB01 /* profile_picture.swift */; };
 		B9716A9020B39AC20099999A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A367C78220AFD336004F4F20 /* Info.plist */; };
 		B9716A9420B602260099999A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B9716A9320B602260099999A /* awsconfiguration.json */; };
 		F715CD0D3F2E520C6F9107A7 /* Pods_chainUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0A25DC79269B8E586FF8C0 /* Pods_chainUITests.framework */; };
@@ -68,6 +69,7 @@
 		A367C7A820AFD8D3004F4F20 /* myinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myinfo.swift; sourceTree = "<group>"; };
 		A367C7AA20AFDC75004F4F20 /* mymessagetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mymessagetable.swift; sourceTree = "<group>"; };
 		A367C7AC20AFDFCA004F4F20 /* customercell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customercell.swift; sourceTree = "<group>"; };
+		B938A94A20B735350068EB01 /* profile_picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profile_picture.swift; sourceTree = "<group>"; };
 		B9716A9320B602260099999A /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		CF0A25DC79269B8E586FF8C0 /* Pods_chainUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chainUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC267441F117284F8FAEEBFF /* Pods-chainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chainTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chainTests/Pods-chainTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				A367C77620AFD335004F4F20 /* AppDelegate.swift */,
+				B938A94A20B735350068EB01 /* profile_picture.swift */,
 				A351EE3020B389F100701266 /* loginVC.swift */,
 				A367C77A20AFD335004F4F20 /* Main.storyboard */,
 				B9716A9320B602260099999A /* awsconfiguration.json */,
@@ -200,7 +203,7 @@
 				A367C76F20AFD335004F4F20 /* Sources */,
 				A367C77020AFD335004F4F20 /* Frameworks */,
 				A367C77120AFD335004F4F20 /* Resources */,
-				250B47273BDC10AF8E386307 /* [CP] Embed Pods Frameworks */,
+				0ED63098DA1773291E2FD17F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -322,7 +325,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		250B47273BDC10AF8E386307 /* [CP] Embed Pods Frameworks */ = {
+		0ED63098DA1773291E2FD17F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,6 +337,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSPinpoint/AWSPinpoint.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
@@ -345,6 +349,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSPinpoint.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
@@ -415,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B938A94B20B735350068EB01 /* profile_picture.swift in Sources */,
 				A367C7A920AFD8D3004F4F20 /* myinfo.swift in Sources */,
 				A367C7AB20AFDC75004F4F20 /* mymessagetable.swift in Sources */,
 				A367C7AD20AFDFCA004F4F20 /* customercell.swift in Sources */,

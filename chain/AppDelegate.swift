@@ -10,6 +10,12 @@ import UIKit
 import AWSMobileClient
 import AWSCore
 import AWSPinpoint
+import Foundation
+
+
+
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
