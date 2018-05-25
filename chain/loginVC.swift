@@ -24,10 +24,24 @@ class loginVC: UIViewController {
         }
     }
     
-   
+    @IBOutlet weak var career: UITextField!
+    
+    @IBOutlet weak var gender: UITextField!
+    
+    @IBOutlet weak var name: UITextField!
+    
+    @IBAction func MyInfo_make_sure(_ sender: UIButton) {
+        
+        
+        
+    }
+    
+    
     @IBAction func logout(_ sender: UIButton) {
         print (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
         )
+        let pp:UserPool = UserPool()
+        pp.read()
         AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
         })
     }
@@ -47,7 +61,7 @@ class loginVC: UIViewController {
                 if error == nil {
                     // SignIn succeeded.
                       print("sign in successfully")
-                    let pp:ProfilePicture = ProfilePicture()
+                    let pp:UserPool = UserPool()
                     pp.createProfilePicture()
                     print (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
                     )

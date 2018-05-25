@@ -17,14 +17,19 @@ import Foundation
 import UIKit
 import AWSDynamoDB
 @objcMembers
-class ProfilePicture: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
-    var _set: String?
+    var _career: String? = "Empty"
+    var _chanceId: String?
+    var _gender: String?
+    var _nickName: String?
+    var _resume: String?
+    var _walletAddress: String?
     
     class func dynamoDBTableName() -> String {
         
-        return "chance-mobilehub-653619147-profile_picture"
+        return "chance-mobilehub-653619147-UserPool"
     }
     
     class func hashKeyAttribute() -> String {
@@ -35,7 +40,12 @@ class ProfilePicture: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
             "_userId" : "userId",
-            "_set" : "set",
+            "_career" : "Career",
+            "_chanceId" : "ChanceId",
+            "_gender" : "Gender",
+            "_nickName" : "NickName",
+            "_resume" : "Resume",
+            "_walletAddress" : "WalletAddress",
         ]
     }
 
@@ -45,13 +55,12 @@ class ProfilePicture: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models you downloaded from Mobile Hub
-        let newsItem: ProfilePicture = ProfilePicture()
+        let newsItem: UserPool = UserPool()
         let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
         let un: String = username!
         print (un)
         newsItem._userId = un
-        newsItem._set = "yes"
-        
+        newsItem._career = "Doctor"
         //Save a new item
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
@@ -63,4 +72,96 @@ class ProfilePicture: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             print("An item was saved.")
         })
     }
+    
+    func update_career(career:String) {
+        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        // Create data object using data models you downloaded from Mobile Hub
+        let newsItem: UserPool = UserPool()
+        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+        let un: String = username!
+        print (un)
+        newsItem._userId = un
+        newsItem._career = "Doctor"
+        //Save a new item
+        dynamoDbObjectMapper.save(newsItem, completionHandler: {
+            (error: Error?) -> Void in
+            
+            if let error = error {
+                print("Amazon DynamoDB Save Error: \(error)")
+                return
+            }
+            print("An item was saved.")
+        })
+    }
+    
+    func update_gender(gender:String) {
+        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        // Create data object using data models you downloaded from Mobile Hub
+        let newsItem: UserPool = UserPool()
+        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+        let un: String = username!
+        print (un)
+        newsItem._userId = un
+        newsItem._career = "Doctor"
+        //Save a new item
+        dynamoDbObjectMapper.save(newsItem, completionHandler: {
+            (error: Error?) -> Void in
+            
+            if let error = error {
+                print("Amazon DynamoDB Save Error: \(error)")
+                return
+            }
+            print("An item was saved.")
+        })
+    }
+    
+    func update_name(name:String) {
+        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        // Create data object using data models you downloaded from Mobile Hub
+        let newsItem: UserPool = UserPool()
+        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+        let un: String = username!
+        print (un)
+        newsItem._userId = un
+        newsItem._career = "Doctor"
+        //Save a new item
+        dynamoDbObjectMapper.save(newsItem, completionHandler: {
+            (error: Error?) -> Void in
+            
+            if let error = error {
+                print("Amazon DynamoDB Save Error: \(error)")
+                return
+            }
+            print("An item was saved.")
+        })
+    }
+    
+    
+    
+    
+    
+    
+    func read() {
+        
+        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
+        
+        dynamoDbObjectMapper.load(UserPool.self, hashKey: username, rangeKey: "", completionHandler: { (objectModel: AWSDynamoDBObjectModel?, error: Error?) -> Void in
+            if let error = error {
+                print("Amazon DynamoDB Read Error: \(error)")
+                return
+            }
+            print("An item was read.")
+            
+            DispatchQueue.main.async {
+                print(objectModel?.dictionaryValue["_career"] as? String)
+            }
+
+        })
+    }
+    
+    
 }
