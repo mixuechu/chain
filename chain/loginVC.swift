@@ -24,16 +24,17 @@ class loginVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var career: UITextField!
+    @IBOutlet weak var careerinput: UITextField!
+   
+    @IBOutlet weak var nameinput: UITextField!
     
-    @IBOutlet weak var gender: UITextField!
+    @IBOutlet weak var genderinput: UITextField!
     
-    @IBOutlet weak var name: UITextField!
     
-    @IBAction func MyInfo_make_sure(_ sender: UIButton) {
-        
-        
-        
+    @IBAction func info_update(_ sender: UIButton) {
+        let pp:UserPool = UserPool()
+        pp.update(name_:nameinput.text!,career_:careerinput.text!,gender_:genderinput.text!)
+            pp.read()
     }
     
     

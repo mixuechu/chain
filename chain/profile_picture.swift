@@ -16,11 +16,15 @@ import AWSUserPoolsSignIn
 import Foundation
 import UIKit
 import AWSDynamoDB
+
+var career = "empty"
+var name="empty"
+var gender = "empty"
 @objcMembers
 class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
-    var _career: String? = "Empty"
+    var _career: String?
     var _chanceId: String?
     var _gender: String?
     var _nickName: String?
@@ -60,7 +64,7 @@ class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         let un: String = username!
         print (un)
         newsItem._userId = un
-        newsItem._career = "Doctor"
+        newsItem._career = "Empty"
         //Save a new item
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
@@ -73,7 +77,7 @@ class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         })
     }
     
-    func update_career(career:String) {
+    func update(name_:String,career_:String,gender_:String) {
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models you downloaded from Mobile Hub
@@ -82,7 +86,9 @@ class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         let un: String = username!
         print (un)
         newsItem._userId = un
-        newsItem._career = "Doctor"
+        newsItem._career = career_
+        newsItem._nickName = name_
+        newsItem._gender = gender_
         //Save a new item
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
@@ -91,57 +97,11 @@ class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                 print("Amazon DynamoDB Save Error: \(error)")
                 return
             }
-            print("An item was saved.")
+            print("An item was updated.")
         })
     }
     
-    func update_gender(gender:String) {
-        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-        // Create data object using data models you downloaded from Mobile Hub
-        let newsItem: UserPool = UserPool()
-        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
-        let un: String = username!
-        print (un)
-        newsItem._userId = un
-        newsItem._career = "Doctor"
-        //Save a new item
-        dynamoDbObjectMapper.save(newsItem, completionHandler: {
-            (error: Error?) -> Void in
-            
-            if let error = error {
-                print("Amazon DynamoDB Save Error: \(error)")
-                return
-            }
-            print("An item was saved.")
-        })
-    }
-    
-    func update_name(name:String) {
-        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-        // Create data object using data models you downloaded from Mobile Hub
-        let newsItem: UserPool = UserPool()
-        let username: String? = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username
-        let un: String = username!
-        print (un)
-        newsItem._userId = un
-        newsItem._career = "Doctor"
-        //Save a new item
-        dynamoDbObjectMapper.save(newsItem, completionHandler: {
-            (error: Error?) -> Void in
-            
-            if let error = error {
-                print("Amazon DynamoDB Save Error: \(error)")
-                return
-            }
-            print("An item was saved.")
-        })
-    }
-    
-    
-    
-    
+  
     
     
     func read() {
@@ -157,7 +117,9 @@ class UserPool: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             print("An item was read.")
             
             DispatchQueue.main.async {
-                print(objectModel?.dictionaryValue["_career"] as? String)
+                career = (objectModel?.dictionaryValue["_career"] as? String)!
+                gender = (objectModel?.dictionaryValue["_gender"] as? String)!
+                name = (objectModel?.dictionaryValue["_nickName"] as? String)!
             }
 
         })

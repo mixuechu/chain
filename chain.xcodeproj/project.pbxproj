@@ -17,10 +17,10 @@
 		A367C78C20AFD336004F4F20 /* chainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C78B20AFD336004F4F20 /* chainTests.swift */; };
 		A367C79720AFD336004F4F20 /* chainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C79620AFD336004F4F20 /* chainUITests.swift */; };
 		A367C7A520AFD63C004F4F20 /* mainTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7A420AFD63C004F4F20 /* mainTC.swift */; };
-		A367C7A920AFD8D3004F4F20 /* myinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7A820AFD8D3004F4F20 /* myinfo.swift */; };
 		A367C7AB20AFDC75004F4F20 /* mymessagetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7AA20AFDC75004F4F20 /* mymessagetable.swift */; };
 		A367C7AD20AFDFCA004F4F20 /* customercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A367C7AC20AFDFCA004F4F20 /* customercell.swift */; };
 		B938A94B20B735350068EB01 /* profile_picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938A94A20B735350068EB01 /* profile_picture.swift */; };
+		B956CA0A20B8D6A1006C8197 /* infoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956CA0920B8D6A1006C8197 /* infoViewController.swift */; };
 		B9716A9020B39AC20099999A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A367C78220AFD336004F4F20 /* Info.plist */; };
 		B9716A9420B602260099999A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B9716A9320B602260099999A /* awsconfiguration.json */; };
 		F715CD0D3F2E520C6F9107A7 /* Pods_chainUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0A25DC79269B8E586FF8C0 /* Pods_chainUITests.framework */; };
@@ -66,10 +66,10 @@
 		A367C79620AFD336004F4F20 /* chainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chainUITests.swift; sourceTree = "<group>"; };
 		A367C79820AFD336004F4F20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A367C7A420AFD63C004F4F20 /* mainTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTC.swift; sourceTree = "<group>"; };
-		A367C7A820AFD8D3004F4F20 /* myinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myinfo.swift; sourceTree = "<group>"; };
 		A367C7AA20AFDC75004F4F20 /* mymessagetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mymessagetable.swift; sourceTree = "<group>"; };
 		A367C7AC20AFDFCA004F4F20 /* customercell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customercell.swift; sourceTree = "<group>"; };
 		B938A94A20B735350068EB01 /* profile_picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profile_picture.swift; sourceTree = "<group>"; };
+		B956CA0920B8D6A1006C8197 /* infoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoViewController.swift; sourceTree = "<group>"; };
 		B9716A9320B602260099999A /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		CF0A25DC79269B8E586FF8C0 /* Pods_chainUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chainUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC267441F117284F8FAEEBFF /* Pods-chainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chainTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chainTests/Pods-chainTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,13 +150,13 @@
 				A367C77620AFD335004F4F20 /* AppDelegate.swift */,
 				B938A94A20B735350068EB01 /* profile_picture.swift */,
 				A351EE3020B389F100701266 /* loginVC.swift */,
+				B956CA0920B8D6A1006C8197 /* infoViewController.swift */,
 				A367C77A20AFD335004F4F20 /* Main.storyboard */,
 				B9716A9320B602260099999A /* awsconfiguration.json */,
 				A367C77D20AFD336004F4F20 /* Assets.xcassets */,
 				A367C77F20AFD336004F4F20 /* LaunchScreen.storyboard */,
 				A367C78220AFD336004F4F20 /* Info.plist */,
 				A367C7A420AFD63C004F4F20 /* mainTC.swift */,
-				A367C7A820AFD8D3004F4F20 /* myinfo.swift */,
 				A367C7AA20AFDC75004F4F20 /* mymessagetable.swift */,
 				A367C7AC20AFDFCA004F4F20 /* customercell.swift */,
 			);
@@ -421,11 +421,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B938A94B20B735350068EB01 /* profile_picture.swift in Sources */,
-				A367C7A920AFD8D3004F4F20 /* myinfo.swift in Sources */,
 				A367C7AB20AFDC75004F4F20 /* mymessagetable.swift in Sources */,
 				A367C7AD20AFDFCA004F4F20 /* customercell.swift in Sources */,
 				A367C77720AFD335004F4F20 /* AppDelegate.swift in Sources */,
 				A351EE3120B389F100701266 /* loginVC.swift in Sources */,
+				B956CA0A20B8D6A1006C8197 /* infoViewController.swift in Sources */,
 				A367C7A520AFD63C004F4F20 /* mainTC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
