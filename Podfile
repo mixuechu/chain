@@ -24,7 +24,7 @@ target 'chain' do
     pod 'AWSUserPoolsSignIn', '~> 2.6.13'
     pod 'AWSAuthUI', '~> 2.6.13'
     pod 'AWSDynamoDB', '~> 2.6.13'
-
+    pod 'AWSS3', '~> 2.6.13'
     # other pods
 
   end

@@ -12,7 +12,7 @@ import AWSAuthUI
 import AWSAuthCore
 import AWSMobileClient
 import AWSUserPoolsSignIn
-
+import AWSS3
 import Foundation
 import UIKit
 import AWSDynamoDB

@@ -11,17 +11,43 @@ import AWSAuthUI
 import AWSAuthCore
 import AWSMobileClient
 import AWSUserPoolsSignIn
+import AWSS3
 
 
+class loginVC: UIViewController, UIImagePickerControllerDelegate,
+UINavigationControllerDelegate {
 
-class loginVC: UIViewController {
-
+    var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
+    var progressBlock: AWSS3TransferUtilityProgressBlock?
+    
+    let imagePicker = UIImagePickerController()
+    let transferUtility = AWSS3TransferUtility.default()
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imagePicker.delegate = self
+        
+        self.completionHandler = { (task, error) -> Void in
+            DispatchQueue.main.async(execute: {
+                if let error = error {
+                    print("Failed with error: \(error)")
+                   // self.statusLabel.text = "Failed"
+                }
+                
+            })
+        }
+        
+        
+        
         if !AWSSignInManager.sharedInstance().isLoggedIn {
             presentAuthUIViewController()
         }
+        
+        
     }
     
     @IBOutlet weak var careerinput: UITextField!
@@ -36,6 +62,58 @@ class loginVC: UIViewController {
         pp.update(name_:nameinput.text!,career_:careerinput.text!,gender_:genderinput.text!)
             pp.read()
     }
+    
+    @IBAction func upload(_ sender: UIButton) {
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
+    func uploadImage(with data: Data) {
+        let expression = AWSS3TransferUtilityUploadExpression()
+        expression.progressBlock = progressBlock
+        
+        transferUtility.uploadData(
+            data,
+            bucket: "chance-userfiles-mobilehub-653619147",
+            key: (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username)!,
+            contentType: "image/png",
+            expression: expression,
+            completionHandler: completionHandler).continueWith { (task) -> AnyObject! in
+                if let error = task.error {
+                    print("Error: \(error.localizedDescription)")
+                    
+                    DispatchQueue.main.async {
+                     //   self.statusLabel.text = "Failed"
+                    }
+                }
+                
+                if let _ = task.result {
+                    
+                    DispatchQueue.main.async {
+                  //      self.statusLabel.text = "Generating Upload File"
+                        print("Upload Starting!")
+                    }
+                    
+                    // Do something with uploadTask.
+                }
+                
+                return nil;
+        }
+    }
+
+    
+    @IBOutlet weak var ownner_profilepicture: UIImageView!
+    
+    
+    
+    
     
     
     @IBAction func logout(_ sender: UIButton) {
@@ -74,4 +152,22 @@ class loginVC: UIViewController {
                 }
         })
     }
+}
+
+
+
+
+@objc extension loginVC {
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if "public.image" == info[UIImagePickerControllerMediaType] as? String {
+            print("in")
+            let image: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            self.uploadImage(with: UIImagePNGRepresentation(image)!)
+            self.ownner_profilepicture.image = image
+        }
+        
+        
+        dismiss(animated: true, completion: nil)
+}
 }
