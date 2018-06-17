@@ -11,7 +11,7 @@ import AWSMobileClient
 import AWSCore
 import AWSPinpoint
 import Foundation
-
+import AWSS3
 
 
 
@@ -35,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "us-east-1:8ea6ccf7-195c-4c3f-a228-dce153794dbd")
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
+        AWSS3TransferUtility.register(with: configuration!, forKey: "USEast1S3TransferUtility")
         pinpoint = AWSPinpoint(configuration:
             AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
         // Create AWSMobileClient to connect with AWS

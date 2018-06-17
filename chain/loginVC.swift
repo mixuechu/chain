@@ -18,10 +18,12 @@ class loginVC: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
 
     var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
+    var completionHandler2: AWSS3TransferUtilityDownloadCompletionHandlerBlock?
     var progressBlock: AWSS3TransferUtilityProgressBlock?
-    
+   var progressBlock2: AWSS3TransferUtilityProgressBlock?
     let imagePicker = UIImagePickerController()
     let transferUtility = AWSS3TransferUtility.default()
+    //let transferUtility = AWSS3TransferUtility.s3TransferUtility(forKey: "USEast1S3TransferUtility")
     
     
     
@@ -30,7 +32,7 @@ UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagePicker.delegate = self
-        
+     //   print((type(of: self.transferUtility)))
         self.completionHandler = { (task, error) -> Void in
             DispatchQueue.main.async(execute: {
                 if let error = error {
@@ -56,6 +58,8 @@ UINavigationControllerDelegate {
     
     @IBOutlet weak var genderinput: UITextField!
     
+    @IBOutlet weak var ownner_profilepicture: UIImageView!
+    
     
     @IBAction func info_update(_ sender: UIButton) {
         let pp:UserPool = UserPool()
@@ -67,9 +71,8 @@ UINavigationControllerDelegate {
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
+        //self.download(key_: (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username)!)
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     
@@ -82,7 +85,8 @@ UINavigationControllerDelegate {
         transferUtility.uploadData(
             data,
             bucket: "chance-userfiles-mobilehub-653619147",
-            key: (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username)!,
+            key:("download.png"),
+            //key: (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username)!,
             contentType: "image/png",
             expression: expression,
             completionHandler: completionHandler).continueWith { (task) -> AnyObject! in
@@ -109,9 +113,7 @@ UINavigationControllerDelegate {
     }
 
     
-    @IBOutlet weak var ownner_profilepicture: UIImageView!
-    
-    
+
     
     
     
@@ -152,6 +154,62 @@ UINavigationControllerDelegate {
                 }
         })
     }
+    
+    
+    
+    
+    func download(key_:String){
+        print("hola")
+        //let data: Data = Data()
+        let expression = AWSS3TransferUtilityDownloadExpression()
+        expression.progressBlock = {(task, progress) in
+            DispatchQueue.main.async(execute: {
+                print("166")
+            })
+        }
+
+        print("163")
+        self.completionHandler2 = { (task, url, data, error) -> Void in
+            DispatchQueue.main.async(execute: {
+                print("166")
+                if let error = error {
+                    NSLog("Failed with error: \(error)")
+                   // self.statusLabel.text = "Failed"
+                   // triggered 9:01
+                    print("failed: 169: \(error)")
+                }
+                else{
+                   // self.statusLabel.text = "Success"
+                    print("successed: 174")
+                    self.ownner_profilepicture.image = UIImage(data: data!)
+                }
+            })
+        }
+        print("181")// 1. keep the register and try upload to make sure it works; 2. if it does, add progress sign to it, to see if its about the download speed. 3. if not, hehehehehe
+        print(key_)
+        transferUtility.downloadData(
+            fromBucket: "chance-userfiles-mobilehub-653619147",
+            key: key_,
+            expression: expression,
+            completionHandler: completionHandler2).continueWith { (task) -> AnyObject! in
+                print("193")
+                if let error = task.error {
+                    NSLog("Error: %@",error.localizedDescription);
+                   // self.statusLabel.text = "Failed"
+                    print("failed 191")
+                }
+                
+                if let _ = task.result {
+                    //self.statusLabel.text = "Starting Download"
+                    NSLog("Download Starting!"); print("successed 196")
+                    // Do something with uploadTask.
+                }
+                return nil;
+        }
+        print("201")
+        
+    }
+
 }
 
 
@@ -164,10 +222,14 @@ UINavigationControllerDelegate {
             print("in")
             let image: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
             self.uploadImage(with: UIImagePNGRepresentation(image)!)
-            self.ownner_profilepicture.image = image
+            self.download(key_: "download.png")
+            //self.download(key_: (AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool().currentUser()?.username)!)
+            //self.ownner_profilepicture.image = image
         }
         
         
         dismiss(animated: true, completion: nil)
 }
 }
+
+
